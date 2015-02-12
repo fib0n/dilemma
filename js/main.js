@@ -9,7 +9,7 @@ var start = function(gamesCount, roundsCount) {
         maxSum = 2 * payoffMatrix[0][0] * roundsCount,
         penalty = {
             movesCountAnalyze: 5,
-            chance: 1,
+            chance: 0.7,
             coeff: 0.2
         },
         play = function(StrategyA, StrategyB, enableLogging) {
