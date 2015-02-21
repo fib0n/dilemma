@@ -1,4 +1,4 @@
-var start = function(gamesCount, roundsCount) {
+var start = function (gamesCount, roundsCount) {
     'use strict';
     var app = window.app,
         payoffMatrix = [
@@ -12,7 +12,7 @@ var start = function(gamesCount, roundsCount) {
             chance: 0.7,
             coeff: 0.2
         },
-        play = function(StrategyA, StrategyB, enableLogging) {
+        play = function (StrategyA, StrategyB, enableLogging) {
             var acc = [0, 0, 0],
                 i;
             for (i = 0; i < gamesCount; i += 1) {
@@ -24,15 +24,15 @@ var start = function(gamesCount, roundsCount) {
                     roundsCount,
                     penalty,
                     enableLogging
-                ).play().getResults().forEach(function(el, index) {
+                ).play().getResults().forEach(function (el, index) {
                     acc[index] += el;
                 });
             }
-            return acc.map(function(num) {
+            return acc.map(function (num) {
                 return Math.round(num / gamesCount * 100) / 100;
             });
         },
-        getOptimalResults = function(matrix) {
+        getOptimalResults = function (matrix) {
             var optimalResult = [],
                 row,
                 rowsCount,
@@ -49,7 +49,7 @@ var start = function(gamesCount, roundsCount) {
                         maxColumnIndexes.push(column);
                     }
                 }
-                maxColumnIndexes.forEach(function(column) {
+                maxColumnIndexes.forEach(function (column) {
                     var isOptimalInColumn = true,
                         i;
 
@@ -70,7 +70,7 @@ var start = function(gamesCount, roundsCount) {
             }
             return optimalResult;
         },
-        getMaxOptimalResults = function(optimalResults) {
+        getMaxOptimalResults = function (optimalResults) {
             var result = [optimalResults[0]],
                 i;
             for (i = 1; i < optimalResults.length; i += 1) {
@@ -82,7 +82,7 @@ var start = function(gamesCount, roundsCount) {
             }
             return result;
         },
-        renderChart = function(matrix) {
+        renderChart = function (matrix) {
             var rows, columns,
                 $charts = $('.charts li');
             for (rows = 0; rows < matrix.length; rows += 1) {
@@ -109,9 +109,9 @@ var start = function(gamesCount, roundsCount) {
                 });
             }
         },
-        renderOptimalResults = function(result, renderToSelector) {
+        renderOptimalResults = function (result, renderToSelector) {
             var $ol = $('<ol/>');
-            result.forEach(function(el) {
+            result.forEach(function (el) {
                 var val = el.value;
                 $('<li/>', {
                     text: val[3] + ' / ' + val[4] + ': ' + val.slice(0, 3).join(', ')
@@ -122,14 +122,14 @@ var start = function(gamesCount, roundsCount) {
     var matrixResult = [],
         tableResult = {};
 
-    app.strategies.forEach(function(StrategyA) {
+    app.strategies.forEach(function (StrategyA) {
         var rowTable = {},
             rowMatrix = [],
             nameA = StrategyA.name;
-        app.strategies.forEach(function(StrategyB) {
+        app.strategies.forEach(function (StrategyB) {
             var nameB = StrategyB.name,
-                avgResult = play(StrategyA, StrategyB);
-            rowTable[nameB] = "[" + avgResult.reduce(function(a, b) {
+                avgResult = play(StrategyA.f, StrategyB.f);
+            rowTable[nameB] = "[" + avgResult.reduce(function (a, b) {
                 return a + ", " + b;
             }) + "]";
             rowMatrix.push(avgResult.concat([nameA, nameB]));
@@ -149,13 +149,13 @@ var start = function(gamesCount, roundsCount) {
     console.log(maxOptimalResult);
 }
 
-$(function() {
+$(function () {
     start($('#gamesCount').val(), $('#roundsCount').val());
-    var resetUI = function() {
+    var resetUI = function () {
         $('.chart').remove();
         $('.equilibrium li').remove();
     }
-    $('#restart').click(function() {
+    $('#restart').click(function () {
         var gamesCount = $('#gamesCount').val() >> 0,
             roundsCount = $('#roundsCount').val() >> 0,
             $parent = $(this).parent();

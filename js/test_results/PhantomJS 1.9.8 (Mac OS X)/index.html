@@ -65,7 +65,7 @@ body { background-color: #eeeeee; padding: 0; margin: 5px; overflow-y: scroll; }
 
 
 	
-	<span class="passingAlert bar">Passing 25 specs</span>
+	<span class="passingAlert bar">Passing 30 specs</span>
 	
 
 
@@ -216,6 +216,36 @@ body { background-color: #eeeeee; padding: 0; margin: 5px; overflow-y: scroll; }
 		
 			<div class="specSummary passed">
 			<span class="description">should COOPERATE if its previous move is DEFECT and it belongs to the DEFEAT group</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">test 'Periodically COOPERATE and DEFECT'</span>
+		
+			<div class="specSummary passed">
+			<span class="description">should COOPERATE on first move</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">should COOPERATE after DEFECT</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">should DEFECT after COOPERATE</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">test 'Soft Majo'</span>
+		
+			<div class="specSummary passed">
+			<span class="description">should COOPERATE if opponent COOPERATEs more</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">should DEFECT if opponent DEFECTs more</span>
 			</div>
 		
 		</div>

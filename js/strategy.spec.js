@@ -4,48 +4,48 @@
 /*global describe, it, expect, AllC, AllD, Rand, Grim, Neg, TFT, STFT, TFTT, Pavlov */
 var DEFECT = app.DEFECT,
     COOPERATE = app.COOPERATE;
-describe("test 'Always COOPERATE'", function() {
+describe("test 'Always COOPERATE'", function () {
     "use strict";
-    it("AllC() === COOPERATE", function() {
+    it("AllC() === COOPERATE", function () {
         expect(app.AllC()).toEqual(COOPERATE);
         expect(app.AllC()).toEqual(COOPERATE);
     });
 });
-describe("test 'Always DEFECT'", function() {
+describe("test 'Always DEFECT'", function () {
     "use strict";
-    it("AllD() === DEFECT", function() {
+    it("AllD() === DEFECT", function () {
         expect(app.AllD()).toEqual(DEFECT);
         expect(app.AllD()).toEqual(DEFECT);
     });
 });
-describe("test 'Rand'", function() {
+describe("test 'Rand'", function () {
     "use strict";
-    it("should COOPERATE if Math.random() returns 0.8", function() {
+    it("should COOPERATE if Math.random() returns 0.8", function () {
         sinon.stub(Math, 'random').returns(0.8);
         var result = app.Rand();
         expect(result === COOPERATE).toEqual(true);
         Math.random.restore();
     });
-    it("should DEFECT if Math.random() returns 0.1", function() {
+    it("should DEFECT if Math.random() returns 0.1", function () {
         sinon.stub(Math, 'random').returns(0.1);
         var result = app.Rand();
         expect(result === DEFECT).toEqual(true);
         Math.random.restore();
     });
 });
-describe("test 'Grim'", function() {
+describe("test 'Grim'", function () {
     "use strict";
     var opponentHistory = [];
-    it("should COOPERATE on first move", function() {
+    it("should COOPERATE on first move", function () {
         expect(app.Grim(opponentHistory)).toEqual(COOPERATE);
     });
-    it("should COOPERATE if opponent COOPERATEs", function() {
+    it("should COOPERATE if opponent COOPERATEs", function () {
         opponentHistory.push({
             'move': COOPERATE
         });
         expect(app.Grim(opponentHistory)).toEqual(COOPERATE);
     });
-    it("should always DEFECT if opponent has chosen DEFECT at least once", function() {
+    it("should always DEFECT if opponent has chosen DEFECT at least once", function () {
         opponentHistory.push({
             'move': COOPERATE
         });
@@ -59,73 +59,73 @@ describe("test 'Grim'", function() {
         expect(app.Grim(opponentHistory)).toEqual(DEFECT);
     });
 });
-describe("test 'Negation'", function() {
+describe("test 'Negation'", function () {
     "use strict";
     var opponentHistory = [];
-    it("should DEFECT if opponent COOPERATEs", function() {
+    it("should DEFECT if opponent COOPERATEs", function () {
         opponentHistory.push({
             'move': COOPERATE
         });
         expect(app.Neg(opponentHistory)).toEqual(DEFECT);
     });
-    it("should COOPERATE if opponent DEFECTs", function() {
+    it("should COOPERATE if opponent DEFECTs", function () {
         opponentHistory.push({
             'move': DEFECT
         });
         expect(app.Neg(opponentHistory)).toEqual(COOPERATE);
     });
 });
-describe("test 'Tit-for-Tat'", function() {
+describe("test 'Tit-for-Tat'", function () {
     "use strict";
     var opponentHistory = [];
-    it("should COOPERATE on first move", function() {
+    it("should COOPERATE on first move", function () {
         expect(app.TFT(opponentHistory)).toEqual(COOPERATE);
     });
-    it("should COOPERATE if opponent COOPERATEs", function() {
+    it("should COOPERATE if opponent COOPERATEs", function () {
         opponentHistory.push({
             'move': COOPERATE
         });
         expect(app.TFT(opponentHistory)).toEqual(COOPERATE);
     });
-    it("should DEFECT if opponent DEFECTs", function() {
+    it("should DEFECT if opponent DEFECTs", function () {
         opponentHistory.push({
             'move': DEFECT
         });
         expect(app.TFT(opponentHistory)).toEqual(DEFECT);
     });
 });
-describe("test 'Suscpicious Tit-for-Tat'", function() {
+describe("test 'Suscpicious Tit-for-Tat'", function () {
     "use strict";
     var opponentHistory = [];
-    it("should DEFECT on first move", function() {
+    it("should DEFECT on first move", function () {
         expect(app.STFT(opponentHistory)).toEqual(DEFECT);
     });
-    it("should COOPERATE if opponent COOPERATEs", function() {
+    it("should COOPERATE if opponent COOPERATEs", function () {
         opponentHistory.push({
             'move': COOPERATE
         });
         expect(app.STFT(opponentHistory)).toEqual(COOPERATE);
     });
-    it("should DEFECT if opponent DEFECTs", function() {
+    it("should DEFECT if opponent DEFECTs", function () {
         opponentHistory.push({
             'move': DEFECT
         });
         expect(app.STFT(opponentHistory)).toEqual(DEFECT);
     });
 });
-describe("test 'Tit-for-Two-Tats'", function() {
+describe("test 'Tit-for-Two-Tats'", function () {
     "use strict";
     var opponentHistory = [];
-    it("should COOPERATE on first move", function() {
+    it("should COOPERATE on first move", function () {
         expect(app.TFTT(opponentHistory)).toEqual(COOPERATE);
     });
-    it("should COOPERATE if opponent COOPERATEs", function() {
+    it("should COOPERATE if opponent COOPERATEs", function () {
         opponentHistory.push({
             'move': COOPERATE
         });
         expect(app.TFTT(opponentHistory)).toEqual(COOPERATE);
     });
-    it("should COOPERATE if opponent DEFECTs after COOPERATE", function() {
+    it("should COOPERATE if opponent DEFECTs after COOPERATE", function () {
         opponentHistory.push({
             'move': COOPERATE
         });
@@ -134,7 +134,7 @@ describe("test 'Tit-for-Two-Tats'", function() {
         });
         expect(app.TFTT(opponentHistory)).toEqual(COOPERATE);
     });
-    it("should DEFECT if opponent DEFECTs twice", function() {
+    it("should DEFECT if opponent DEFECTs twice", function () {
         opponentHistory.push({
             'move': COOPERATE
         });
@@ -147,48 +147,86 @@ describe("test 'Tit-for-Two-Tats'", function() {
         expect(app.TFTT(opponentHistory)).toEqual(DEFECT);
     });
 });
-
-describe("test Pavlov", function() {
+describe("test Pavlov", function () {
     "use strict";
     var opponentHistory = [],
         ownHistory = [];
-    it("should COOPERATE on first move if Math.random() returns 0.6", function() {
+    it("should COOPERATE on first move if Math.random() returns 0.6", function () {
         sinon.stub(Math, 'random').returns(0.6);
         expect(app.Pavlov(opponentHistory, ownHistory)).toEqual(COOPERATE);
         Math.random.restore();
     });
-    it("should DEFECT on first move if Math.random() returns 0.3", function() {
+    it("should DEFECT on first move if Math.random() returns 0.3", function () {
         sinon.stub(Math, 'random').returns(0.3);
         expect(app.Pavlov(opponentHistory, ownHistory)).toEqual(DEFECT);
         Math.random.restore();
     });
-    it("should COOPERATE if its previous move is COOPERATE and it belongs to the SUCCESS group", function() {
+    it("should COOPERATE if its previous move is COOPERATE and it belongs to the SUCCESS group", function () {
         ownHistory.push({
             'move': COOPERATE,
             'success': true
         });
         expect(app.Pavlov(opponentHistory, ownHistory)).toEqual(COOPERATE);
     });
-    it("should DEFECT if its previous move is DEFECT and it belongs to the SUCCESS group", function() {
+    it("should DEFECT if its previous move is DEFECT and it belongs to the SUCCESS group", function () {
         ownHistory.push({
             'move': DEFECT,
             'success': true
         });
         expect(app.Pavlov(opponentHistory, ownHistory)).toEqual(DEFECT);
     });
-    it("should DEFECT if its previous move is COOPERATE and it belongs to the DEFEAT group", function() {
+    it("should DEFECT if its previous move is COOPERATE and it belongs to the DEFEAT group", function () {
         ownHistory.push({
             'move': COOPERATE,
             'success': false
         });
         expect(app.Pavlov(opponentHistory, ownHistory)).toEqual(DEFECT);
     });
-    it("should COOPERATE if its previous move is DEFECT and it belongs to the DEFEAT group", function() {
+    it("should COOPERATE if its previous move is DEFECT and it belongs to the DEFEAT group", function () {
         ownHistory.push({
             'move': DEFECT,
             'success': false
         });
         expect(app.Pavlov(opponentHistory, ownHistory)).toEqual(COOPERATE);
     });
-
+});
+describe("test 'Periodically COOPERATE and DEFECT'", function () {
+    "use strict";
+    var opponentHistory = [],
+        ownHistory = [];
+    it("should COOPERATE on first move", function () {
+        expect(app.CD(opponentHistory, ownHistory)).toEqual(COOPERATE);
+    });
+    it("should COOPERATE after DEFECT", function () {
+        ownHistory.push({
+            'move': DEFECT
+        });
+        expect(app.CD(opponentHistory, ownHistory)).toEqual(COOPERATE);
+    });
+    it("should DEFECT after COOPERATE", function () {
+        ownHistory.push({
+            'move': COOPERATE
+        });
+        expect(app.CD(opponentHistory, ownHistory)).toEqual(DEFECT);
+    });
+});
+describe("test 'Soft Majo'", function () {
+    "use strict";
+    var opponentHistory = [];
+    it("should COOPERATE if opponent COOPERATEs more", function () {
+        opponentHistory = [COOPERATE, DEFECT, COOPERATE].map(function (el) {
+            return {
+                'move': el
+            };
+        });
+        expect(app.SoftMajo(opponentHistory)).toEqual(COOPERATE);
+    });
+    it("should DEFECT if opponent DEFECTs more", function () {
+        opponentHistory = [COOPERATE, DEFECT, COOPERATE, DEFECT, DEFECT].map(function (el) {
+            return {
+                'move': el
+            };
+        });
+        expect(app.SoftMajo(opponentHistory)).toEqual(DEFECT);
+    });
 });
