@@ -2,7 +2,7 @@
   "name": "prisoner_dilemma",
   "description": "The iterated prisoners' dilemma",
   "main": "js/strategy.js",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "node": "stable"
   },
