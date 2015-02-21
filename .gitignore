@@ -1,2 +1,3 @@
 **/node_modules/*
 js/Archive.zip
+js/coverage/*.json

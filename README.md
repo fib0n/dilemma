@@ -14,4 +14,4 @@ npm test
 
 Для тестирования используется [Jasmine](http://jasmine.github.io/). Покрытие кода считается с помощью [Istanbul](https://github.com/gotwarlost/istanbul) и [Karma](https://github.com/karma-runner/karma)
 
-Тестирование и анализ покрытия проводился для файла [strategy.js](https://github.com/fib0n/dilemma/blob/master/js/strategy.js). Сгенерированные отчеты о результатах теста лежат в [jasmine.html](https://github.com/fib0n/dilemma/blob/master/js/strategy.spec/jasmine.html). Сгенерированный отчет о покрытии кода [index.html](https://github.com/fib0n/dilemma/blob/master/js/coverage/PhantomJS%201.9.8%20(Mac%20OS%20X)/index.html).
+Тестирование и анализ покрытия проводился для файла [strategy.js](https://github.com/fib0n/dilemma/blob/master/js/strategy.js). Сгенерированные отчеты о результатах теста лежат в [index.html](https://github.com/fib0n/dilemma/blob/master/js/test_results/PhantomJS%201.9.8%20(Mac%20OS%20X)/index.html). Сгенерированный отчет о покрытии кода [index.html](https://github.com/fib0n/dilemma/blob/master/js/coverage/PhantomJS%201.9.8%20(Mac%20OS%20X)/index.html).
