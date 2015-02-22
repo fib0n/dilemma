@@ -1,5 +1,5 @@
 window.app = window.app || {};
-window.app.Game = function(payoffMatrix, successPayoff, strategyA, strategyB,
+window.app.Game = function (payoffMatrix, successPayoff, strategyA, strategyB,
     rounds, penalty, logging) {
     'use strict';
     window.app.DEFECT = 1;
@@ -9,11 +9,12 @@ window.app.Game = function(payoffMatrix, successPayoff, strategyA, strategyB,
         a: 0,
         b: 0
     };
-    this.play = function() {
+    this.play = function () {
         var history = {
-            a: [],
-            b: []
-        }, curStep = 0;
+                a: [],
+                b: []
+            },
+            curStep = 0;
 
         for (curStep = 1; curStep <= rounds; curStep += 1) {
             var moveA = strategyA(history.b, history.a),
@@ -42,24 +43,26 @@ window.app.Game = function(payoffMatrix, successPayoff, strategyA, strategyB,
         return this;
     };
 
-    this.getPayoff = function(ownHistory, moveA, moveB) {
+    this.getPayoff = function (ownHistory, moveA, moveB) {
         var fairPayOff = payoffMatrix[moveA][moveB],
             previousMovesCount = ownHistory.length;
-        if (previousMovesCount < penalty.movesCountAnalyze)
+        if (previousMovesCount < penalty.movesCountAnalyze) {
             return fairPayOff;
+        }
 
         var sum = 0,
             i;
         for (i = 1; i <= penalty.movesCountAnalyze; i += 1) {
-            if (ownHistory[previousMovesCount - i].move === app.COOPERATE)
+            if (ownHistory[previousMovesCount - i].move === app.COOPERATE) {
                 return fairPayOff;
+            }
 
             sum += ownHistory[previousMovesCount - i].result;
         }
         return (Math.random() > penalty.chance) ? -penalty.coeff * sum : payoffMatrix[moveA][moveB];
     };
 
-    this.getResults = function() {
+    this.getResults = function () {
         return [results.a, results.b, results.a + results.b];
     };
 };
